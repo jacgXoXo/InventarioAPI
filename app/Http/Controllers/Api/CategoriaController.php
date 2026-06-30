@@ -10,16 +10,71 @@ class CategoriaController extends Controller
 {
     public function index()
     {
-        return Categoria::all();
+        return response()->json(
+            Categoria::with('productos')->get()
+        );
     }
 
     public function store(Request $request)
     {
-        $categoria = Categoria::create([
-            'nombre' => $request->nombre,
-            'descripcion' => $request->descripcion
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'required|string'
         ]);
 
-        return response()->json($categoria, 201);
+        $categoria = Categoria::create($request->all());
+
+        return response()->json([
+            'mensaje' => 'Categoría creada correctamente',
+            'categoria' => $categoria
+        ],201);
+    }
+
+    public function show($id)
+    {
+        $categoria = Categoria::with('productos')->find($id);
+
+        if(!$categoria){
+            return response()->json([
+                'mensaje' => 'Categoría no encontrada'
+            ],404);
+        }
+
+        return response()->json($categoria);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $categoria = Categoria::find($id);
+
+        if(!$categoria){
+            return response()->json([
+                'mensaje' => 'Categoría no encontrada'
+            ],404);
+        }
+
+        $categoria->update($request->all());
+
+        return response()->json([
+            'mensaje' => 'Categoría actualizada correctamente',
+            'categoria' => $categoria
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $categoria = Categoria::find($id);
+
+        if(!$categoria){
+            return response()->json([
+                'mensaje' => 'Categoría no encontrada'
+            ],404);
+        }
+
+        $categoria->delete();
+
+        return response()->json([
+            'mensaje' => 'Categoría eliminada correctamente'
+        ]);
     }
 }
