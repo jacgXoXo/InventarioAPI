@@ -1,0 +1,45 @@
+{
+  "info": {
+    "name": "Inventario API - Clientes",
+    "description": "Operaciones CRUD para clientes. El correo debe ser único al crear un cliente.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://127.0.0.1:8000/api" },
+    { "key": "id", "value": "1" }
+  ],
+  "item": [
+    {
+      "name": "GET - Listar clientes",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/clientes", "description": "Obtiene todos los clientes con sus ventas relacionadas." }
+    },
+    {
+      "name": "GET - Obtener cliente por ID",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/clientes/{{id}}", "description": "Obtiene un cliente por su identificador." }
+    },
+    {
+      "name": "POST - Crear cliente",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Laura\",\n  \"apellido\": \"Gómez\",\n  \"telefono\": \"3012345678\",\n  \"correo\": \"laura.gomez@example.com\"\n}", "options": { "raw": { "language": "json" } } },
+        "url": "{{baseUrl}}/clientes",
+        "description": "Crea un cliente. nombre, apellido y correo son obligatorios."
+      }
+    },
+    {
+      "name": "PUT - Actualizar cliente",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Laura\",\n  \"apellido\": \"Gómez Ramírez\",\n  \"telefono\": \"3098765432\",\n  \"correo\": \"laura.gomez.actualizada@example.com\"\n}", "options": { "raw": { "language": "json" } } },
+        "url": "{{baseUrl}}/clientes/{{id}}",
+        "description": "Actualiza un cliente existente."
+      }
+    },
+    {
+      "name": "DELETE - Eliminar cliente",
+      "request": { "method": "DELETE", "header": [], "url": "{{baseUrl}}/clientes/{{id}}", "description": "Elimina un cliente y sus ventas asociadas, si existen." }
+    }
+  ]
+}

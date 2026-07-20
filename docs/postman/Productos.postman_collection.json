@@ -1,0 +1,45 @@
+{
+  "info": {
+    "name": "Inventario API - Productos",
+    "description": "Operaciones CRUD para productos. Antes de crear un producto, usa IDs existentes de categorías y proveedores.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://127.0.0.1:8000/api" },
+    { "key": "id", "value": "1" }
+  ],
+  "item": [
+    {
+      "name": "GET - Listar productos",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/productos", "description": "Obtiene los productos con categoría y proveedor." }
+    },
+    {
+      "name": "GET - Obtener producto por ID",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/productos/{{id}}", "description": "Obtiene un producto por su identificador." }
+    },
+    {
+      "name": "POST - Crear producto",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Arroz 1 kg\",\n  \"precio\": 5200.00,\n  \"stock\": 30,\n  \"categoria_id\": 1,\n  \"proveedor_id\": 1\n}", "options": { "raw": { "language": "json" } } },
+        "url": "{{baseUrl}}/productos",
+        "description": "Crea un producto. categoria_id y proveedor_id deben existir."
+      }
+    },
+    {
+      "name": "PUT - Actualizar producto",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Arroz premium 1 kg\",\n  \"precio\": 5800.00,\n  \"stock\": 25,\n  \"categoria_id\": 1,\n  \"proveedor_id\": 1\n}", "options": { "raw": { "language": "json" } } },
+        "url": "{{baseUrl}}/productos/{{id}}",
+        "description": "Actualiza un producto existente."
+      }
+    },
+    {
+      "name": "DELETE - Eliminar producto",
+      "request": { "method": "DELETE", "header": [], "url": "{{baseUrl}}/productos/{{id}}", "description": "Elimina un producto y sus ventas asociadas, si existen." }
+    }
+  ]
+}

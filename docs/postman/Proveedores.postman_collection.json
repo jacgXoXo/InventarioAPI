@@ -1,0 +1,45 @@
+{
+  "info": {
+    "name": "Inventario API - Proveedores",
+    "description": "Operaciones CRUD para proveedores. Los campos telefono, correo y direccion son opcionales.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://127.0.0.1:8000/api" },
+    { "key": "id", "value": "1" }
+  ],
+  "item": [
+    {
+      "name": "GET - Listar proveedores",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/proveedores", "description": "Obtiene todos los proveedores con sus productos relacionados." }
+    },
+    {
+      "name": "GET - Obtener proveedor por ID",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/proveedores/{{id}}", "description": "Obtiene un proveedor por su identificador." }
+    },
+    {
+      "name": "POST - Crear proveedor",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Distribuidora Nacional\",\n  \"telefono\": \"3001234567\",\n  \"correo\": \"ventas@distribuidoranacional.com\",\n  \"direccion\": \"Calle 10 # 20-30\"\n}", "options": { "raw": { "language": "json" } } },
+        "url": "{{baseUrl}}/proveedores",
+        "description": "Crea un proveedor. nombre es obligatorio."
+      }
+    },
+    {
+      "name": "PUT - Actualizar proveedor",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Distribuidora Nacional S.A.S.\",\n  \"telefono\": \"3007654321\",\n  \"correo\": \"contacto@distribuidoranacional.com\",\n  \"direccion\": \"Avenida 15 # 25-40\"\n}", "options": { "raw": { "language": "json" } } },
+        "url": "{{baseUrl}}/proveedores/{{id}}",
+        "description": "Actualiza un proveedor existente."
+      }
+    },
+    {
+      "name": "DELETE - Eliminar proveedor",
+      "request": { "method": "DELETE", "header": [], "url": "{{baseUrl}}/proveedores/{{id}}", "description": "Elimina un proveedor y sus productos asociados, si existen." }
+    }
+  ]
+}

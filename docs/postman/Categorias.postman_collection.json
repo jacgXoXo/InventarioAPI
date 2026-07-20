@@ -1,0 +1,45 @@
+{
+  "info": {
+    "name": "Inventario API - Categorías",
+    "description": "Operaciones CRUD para categorías. URL base: {{baseUrl}}.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://127.0.0.1:8000/api" },
+    { "key": "id", "value": "1" }
+  ],
+  "item": [
+    {
+      "name": "GET - Listar categorías",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/categorias", "description": "Obtiene todas las categorías con sus productos relacionados." }
+    },
+    {
+      "name": "GET - Obtener categoría por ID",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/categorias/{{id}}", "description": "Obtiene una categoría por su identificador." }
+    },
+    {
+      "name": "POST - Crear categoría",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Bebidas\",\n  \"descripcion\": \"Bebidas y refrescos\"\n}", "options": { "raw": { "language": "json" } } },
+        "url": "{{baseUrl}}/categorias",
+        "description": "Crea una categoría. nombre y descripcion son obligatorios."
+      }
+    },
+    {
+      "name": "PUT - Actualizar categoría",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Bebidas Premium\",\n  \"descripcion\": \"Bebidas, jugos y refrescos\"\n}", "options": { "raw": { "language": "json" } } },
+        "url": "{{baseUrl}}/categorias/{{id}}",
+        "description": "Actualiza una categoría existente."
+      }
+    },
+    {
+      "name": "DELETE - Eliminar categoría",
+      "request": { "method": "DELETE", "header": [], "url": "{{baseUrl}}/categorias/{{id}}", "description": "Elimina una categoría y, por la relación configurada, sus productos asociados." }
+    }
+  ]
+}

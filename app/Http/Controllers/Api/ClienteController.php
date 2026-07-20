@@ -55,13 +55,6 @@ class ClienteController extends Controller
             ], 404);
         }
 
-        $request->validate([
-            'nombre' => 'required|string|max:255',
-            'apellido' => 'required|string|max:255',
-            'telefono' => 'nullable|string|max:20',
-            'correo' => 'required|email|max:255|unique:clientes,correo,' . $id,
-        ]);
-
         $cliente->update($request->all());
 
         return response()->json([
